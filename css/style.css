@@ -1,0 +1,600 @@
+/* Usage of media queries to use different styles for portrait and landscape screen (menu apears at the top or right side) */
+@media (orientation: portrait) { 
+	/* MAIN MENU: PORTRAIT */
+	/* Settings for the menu-section */
+	.menu{
+		width:100% !important;
+		min-height: 20%;
+		max-height: 100%;
+		margin-top: 50px;
+		position: absolute;
+		filter: alpha(opacity=85);
+		opacity: 0.85;
+	}
+	
+	.instructionsMinWidth{
+		min-width: 45%;
+	}
+}
+
+@media (orientation: landscape) {
+	/* MAIN MENU: LANDSCAPE */
+	/* Settings for the menu-section */
+	.menu{
+		height:100% !important;
+		min-width: 20%;
+		max-width: 100%;
+		margin-top: 50px;
+		left: auto;
+		right: 0;
+		position: absolute;
+		filter: alpha(opacity=85);
+		opacity: 0.85;
+	}
+	
+	.instructionsMinWidth{
+		min-width: 80%;
+	}
+}
+
+/* GENERAL STYLING */
+body { 
+	background-color: #FFF;
+    overflow: hidden;
+    font-family: Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	height: 100%;
+    width: 100%;
+	margin: 0;
+    padding: 0;
+}
+text{
+	font-family: Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+	font-weight: normal;
+	font-size: 15px;
+}
+/* Map settings */
+#map {
+  position:fixed;
+  width:100%;
+  height:100%;
+  z-index:0;
+}
+/* Map specific styling (here: symbol animation) */
+@-webkit-keyframes
+pulse{
+	0%{
+		opacity: 1.0;
+    }
+    45%{
+        opacity: .30;
+    }
+    100%{
+        opacity: 1.0;
+    }
+}
+@-moz-keyframes
+pulse{
+    0%{
+        opacity: 1.0;
+    }
+    45%{
+        opacity: .30;
+    }
+    100%{
+        opacity: 1.0;
+    }
+}
+.pulseInsidePolygon {
+	background-color: #2F547F;
+	border: 8px solid rgb(91, 125, 165);
+	border-radius: 50%;
+	-webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: pulse;
+    -moz-animation-duration: 3s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-name: pulse;
+}
+.pulseOutsidePolygon {
+	background-color: #E58339;
+	border: 8px solid rgb(224, 160, 92);
+	border-radius: 50%;
+	-webkit-animation-duration: 3s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-name: pulse;
+    -moz-animation-duration: 3s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-name: pulse;
+}
+.useDragMouse{
+	cursor: grab !important;
+}
+/* Color and text settings */
+.mainColor{
+	background-color: #00703C;
+}
+.mainColorTxt{
+	color: #00703C !important;
+}
+.grayColor{
+	background-color: gray;
+}
+.grayTxt{
+	color: lightgray;
+}
+.backColor{
+	background-color: white;
+}
+.backColorTxt{
+	color: white;
+}
+/* Color of hover effect on the menu items */
+text.hoverTextCompl:hover{
+	color: lightgray;
+}
+text.hoverTextCompl:active{
+	color: lightgray;
+}
+text.hoverTextMain:hover{
+	color: gray !important;
+	cursor: pointer;
+}
+text.hoverTextMain:active{
+	color: gray !important;
+}
+/* Style for icons and text parts */
+.fontIcon{
+	font-size: 30px;
+	line-height: 48px !important;
+}
+.boldTxt{
+	font-weight: bold;
+}
+.titleTxt{
+	font-size: 16px;
+}
+.stdTxt{
+	font-family: Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+}
+
+/* TITLE BAR */
+/* Title bar on the top */
+#balken{
+	height: 50px;
+	width: 100%;
+	position: absolute;
+	filter: alpha(opacity=85);
+	opacity: 0.85;
+}
+/* Logo settings */
+.logo{
+	max-height: 30px;
+	cursor: pointer;
+	margin-top: 10px;
+	position: absolute;
+}
+.logoRSA{
+	margin-left: 85px;
+}
+.logoFOCUS{
+	margin-left: 210px;
+}
+#settingsArea{
+	margin-left: 15px;
+	filter: alpha(opacity=1);
+	opacity: 1;
+}
+/* Size, position and font-weight for the title text */
+#title{
+	font-size: 20px;
+	margin-top: 10px;
+	margin-left: 370px;
+	font-weight: bold;
+	position: absolute;
+}
+/* Show-my-location-button area */
+#lacateOuterDiv{
+	right: 330px;
+	position: absolute;
+}
+#locateDiv{
+	position: absolute;
+	z-index: 10;
+	display: block;
+}
+#locateDivTxt{
+	z-index: 20;
+	width: 50px;
+    height: 50px;
+	cursor: pointer;
+	position: absolute;
+}
+/* Edit-button area */
+#editDiv{
+	right: 190px;
+	margin-top: 3px;
+	position: absolute;
+	z-index: 20;
+}
+
+/* MAIN MENU */
+/* Hide at the beginning */
+#creatorMenu{
+	display: none;
+	padding-left: 2.5em;
+	padding-right: 2.5em;
+	padding-top: 1em;
+}
+/* Class for center a div-element wihtin another div-element */
+.centerDiv{
+    left: 50%;
+    transform: translate(-50%, 0);
+}
+/* Class for hiding elements */
+.menuDiv{
+	display: none;
+	position: absolute;
+}
+/* Field widths for entering values that correspond to a marker */
+.fieldWidth{
+	width: 330px;
+	height: 30px;
+}
+.fieldWidthSmall{
+	width: 100px;
+	height: 30px;
+}
+.marginTopStartMenuTxt{
+	margin-top: 20px;
+}
+/* Table that contains the fields for entering values for updating/creating marker metadata */
+#newMarkerTbl{
+	width: 500px;
+}
+#newMarkerTbl tr{
+	height: 40px;
+}
+#newMarkerTbl th{
+	height: 45px;
+	text-align: left;
+}
+/* General settings for tables, margins, alignment, ... */
+.smallTr{
+	height: 15px !important;
+}
+.disabledTxt{
+	display:none;
+}
+.rightAlign{
+	right: 10px;
+}
+/* Buttons within the delte menu */
+.delSavButtons{
+	position: absolute;
+	width: 100%;
+	margin-top: 30px;
+}
+.delSavMarkercancleButton{
+	margin-left: -25px;
+}
+.delSavMarkerapplyButton{
+	margin-left: 45px;
+}
+
+/* SETTINGS FOR BUTTONS (right side)*/
+/* Navigation area and its four buttons (my-location, zoom-in, zoom-out, home) */
+#navigation{
+	right: 30px;
+	bottom: 30px;
+	position: absolute;
+	width: 50px;
+	height: 200px;
+}
+/* Zoom-in-button */
+#btnPlus{
+	margin-top: 0px;
+}
+/* Initial-extent-button */
+#btnHome{
+	margin-top: 70px;
+}
+/* Zoom-out-button */
+#btnMinus{
+	margin-top: 140px;
+}
+/* Basic settings for all the buttons using this classes */
+.btn{
+	width: 50px;
+    height: 50px;
+	cursor: pointer;
+	position: absolute;
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+}
+.btnImg{
+	vertical-align: center;
+	text-align: center;
+}
+.btnTbl{
+	position: relative;
+	height: 50px;
+	margin-top: 5px;
+	width: 100%;
+}
+
+/* LEFT MENU */
+/* The right menu area (background div) */
+#infoBar{
+	height: 100%;
+	width: 280px;
+	left: 0px; 
+	margin-top: 50px; 
+	position: absolute;
+}
+/* Position for logos, not used at the moment (empty) */
+#logoArea{
+	margin-left: 60px;
+	margin-top: 10px;
+	position: relative;
+}
+/* Title texts formatting (bold) */
+.headlines{
+	margin-left: 40px;
+	line-height: 30px;
+}
+/* For separating menu items */
+.lineColor{
+	background-color: lightgray;
+}
+.lineTbl{
+	height: 1px;
+	width: 100%;
+}
+.lineRow{
+	height: 20px !important;
+}
+.legendLeft{
+	margin-left: 15px;
+}
+/* Distance from the info-title to the subtext */
+#infoTitle{
+	margin-bottom: 8px;
+}
+/* Area containing the table with the infos such as legend, overview map, ... */
+#infoArea{
+	position: relative;
+	width: 270px;
+	height: 90%;
+	margin-left: 10px;
+	margin-top: 0px;
+	overflow-y: auto;
+	overflow-x:hidden;
+}
+/* Table containing the legend, overview map and the info table including project information */
+#infoBarTbl{
+	width:250px;
+}
+#legendLeft{
+	left: 30px;
+}
+/* The table at the end containing meta infos about the poject, autor, date, partners, ... */
+#infoTable{
+	margin-left: 10px;
+	width: 220px;
+}
+#infoTable td{
+	text-align: left;
+}
+/* Text formatting for the table at the end (meta infos) */
+.infoTextTitle{
+	vertical-align: top;
+}
+.infoText{
+	font-weight: normal !important;
+}
+.infoTextBold{
+	font-weight: bold !important;
+}
+/* Settings for the close buttons */
+.closeRight{
+	right: 10px;
+}
+.closeBtn{
+	position: absolute;
+	margin-top: 0px;
+	z-index: 20;
+	cursor: pointer;
+	top: 0px;
+}
+/* Legend styling */
+.legend{
+	position: relative;
+	padding-bottom: 20px;
+}
+#legendTbl{
+	margin-left: 10px;
+	width: 200px;
+}
+#legendTbl td, th{
+	text-align: left;
+	font-weight: normal;
+}
+.legendIcon{	
+	height: 20px;
+	margin-top: 10px;
+}
+.legendIconIndustry{
+	height: 25px;
+}
+.mittleRow{
+	height: 12px;
+}
+/* Project info and source section */
+.underline{
+	text-decoration: underline;
+}
+.source{
+	line-height: 20px;
+}
+#sw_source{
+	margin-top: 10px;
+}
+.marginRightMenu{
+	margin-left: 10px;
+}
+#iconOpenSwSource{
+	-webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+	cursor: pointer;
+}
+
+/* CHANGE BACKGROUNDMAP BUTTON */
+/* Basemap Change Button */
+#basemapChangeBtn{
+	left: 30px;
+	bottom: 30px;
+}
+#basemapImg{
+	margin-left: 2px;
+	margin-top: 2px;
+	width: 46px;
+	height: 46px;
+}
+
+
+/* OVERWRITE FILES (e.g. leaflet.css, leaflet.draw.css) */
+/* General toolbar styles */
+.leaflet-bar {
+	box-shadow: none;
+	border-radius: 0px !important;
+}
+.leaflet-bar a:first-child {
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+}
+.leaflet-bar a:last-child {
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+	margin-top: 3px;
+	border-bottom: none;
+}
+.leaflet-bar a {
+	background-color: #00703C !important; /* Color of location-button and edit-buttons */
+	border-bottom: none;
+	line-height: 48px;
+	display: block;
+	text-align: center;
+	text-decoration: none !important;
+	margin-top: 0px !important;
+	color: white;
+	width: 45px; /* Width of location-button and edit-buttons */
+    height: 45px; /* Height of location-button and edit-buttons */
+	cursor: pointer;
+	/*position: absolute;*/ /* Remove this to show the edit-buttons below each other */
+}
+.leaflet-bar a:hover{
+	background-color: #00703C !important;
+	border-bottom: none;
+	line-height: 48px;
+	display: block;
+	text-align: center;
+	text-decoration: none !important;
+	margin-top: 0px !important;
+	color: lightgray !important;
+	width: 45px;
+    height: 45px;
+	cursor: pointer;
+	filter: alpha(opacity=80);
+	opacity: 0.8;
+	/*position: absolute;*/ /* Remove this to show the edit-buttons below each other */
+}
+/* Draw-toolbar settings */
+.leaflet-draw-draw-polygon:before{
+	font-family: 'icomoon';
+	content: "\ea53"; /* Set symbol for marker-button */
+	font-size: 27px;
+	line-height: 40px;
+}
+.leaflet-draw-draw-marker:before{
+	font-family: 'icomoon';
+	content: "\ea55"; /* Set symbol for marker-button */
+	font-size: 27px;
+	line-height: 40px;
+	/*margin-left: 50px;
+	z-index: 30;*/
+}
+.leaflet-draw-edit-edit:before{
+	font-family: 'icomoon';
+	content: "\e905"; /* Set symbol for edit-button */
+	font-size: 27px;
+	line-height: 40px;
+	/*margin-left: 110px;
+	z-index: 30;*/
+}
+.leaflet-draw-edit-remove:before{
+	font-family: 'icomoon';
+	content: "\e9ad"; /* Set symbol for delete-button */
+	font-size: 27px;
+	line-height: 40px;
+	/*margin-left: 170px;
+	z-index: 30;*/
+}
+.leaflet-draw-actions li:first-child a:before{
+	font-family: 'icomoon';
+	content: "\ea10"; /* Set symbol for save-button */
+	color: white;
+	font-size: 27px;
+	line-height: 40px !important;
+}
+.leaflet-draw-actions li:last-child a:before{
+	font-family: 'icomoon';
+	content: "\ea0f"; /* Set symbol for cancel-button */
+	color: white;
+	font-size: 27px;
+	line-height: 40px !important;
+}
+/* Popup settings */
+.leaflet-popup {
+	position: absolute;
+	text-align: center;
+	font-family: Verdana, Geneva, Lucida, Arial, Helvetica, sans-serif;
+	font-size: 15px;
+	color: #00703C !important;
+}
+.leaflet-popup-content-wrapper {
+	padding: 1px;
+	text-align: left;
+	border-radius: 0px !important; /* No radius! */
+}
+.leaflet-popup-content {
+	margin: 13px 19px;
+	line-height: 1.4;
+}
+.leaflet-popup-content p {
+	margin: 18px 0;
+}
+.leaflet-popup-content-wrapper,
+.leaflet-popup-tip {
+	background: white;
+	box-shadow: none; /* No shadow! */
+}
+.leaflet-container a.leaflet-popup-close-button {
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 10px 4px 0 0;
+	text-align: center;
+	width: 35px;
+	height: 35px;
+	font: 40px/14px Tahoma, Verdana, sans-serif;
+	color: #c3c3c3;
+	text-decoration: none;
+	font-weight: bold;
+	background: transparent;
+}
+

@@ -1,0 +1,434 @@
+<html>
+	<head>
+		<meta charset=utf-8 />
+		<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+
+		<!-- Load Leaflet from CDN 
+			 Source: //cdn.jsdelivr.net/leaflet/0.7.3/leaflet.css, //cdn.jsdelivr.net/leaflet/0.7.3/leaflet.js -->
+		<link rel="stylesheet" href="css/leaflet.css" />
+		<script src="js/leaflet.js"></script>
+
+		<!-- Load Esri Leaflet from CDN -->
+		<script src="//cdn.jsdelivr.net/leaflet.esri/1.0.0/esri-leaflet.js"></script>
+	  
+		<!-- Leaflet Draw 
+			 Sources: https://rawgit.com/Leaflet/Leaflet.draw/master/dist/leaflet.draw-src.js, https://rawgit.com/Leaflet/Leaflet.draw/master/dist/leaflet.draw.css -->
+		<script src="js/leaflet.draw-src.js"></script>
+		<link rel="stylesheet" href="css/leaflet.draw.css">
+
+		<!-- JQuery (MIT Licence): https://jquery.org/license/,
+			 Original file: https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js -->
+		<script src="js/jquery.min.js"></script>
+
+		<!-- WFST from MIT
+			 Source: https://github.com/Flexberry/Leaflet-WFST/blob/master/dist/Leaflet-WFST.src.js -->
+		<script src="js/Leaflet-WFST.src.js"></script>
+		
+		<!-- MIT Licence: https://github.com/domoritz/leaflet-locatecontrol/blob/gh-pages/LICENSE,
+		 Original file: //rawgithub.com/domoritz/leaflet-locatecontrol/gh-pages/dist/L.Control.Locate.min.js -->
+		<link rel="stylesheet" href="css/L.Control.Locate.min.css" />
+		<script src="js/L.Control.Locate.min.js" ></script>
+	  
+		<!-- Own files -->
+		<script type="text/javascript" src="js/main.js"></script>
+		<link rel="stylesheet" href="css/style.css" type="text/css">
+		<script type="text/javascript" src="js/toggleelements.js"></script>
+		<!-- Font that have symbols for map design -->
+		<link rel="stylesheet" href="css/font.css" type="text/css">
+		
+		<!-- Languages support: DE/EN -->
+		<script type="text/javascript">
+			// Get the actual used language
+			var lang = navigator.languages ? navigator.languages[0] : (navigator.language || navigator.userLanguage);
+			// If language is not "en"/"de" use "en" as default
+			if(lang != "de" && lang != "en"){
+				if(lang == "de-de" || lang == "de-at" || lang == "de-DE" || lang == "de-AT"){
+					lang = "de";
+				}
+				else{
+					lang = "en";
+				}
+			}
+			
+			// Language data
+			var langData = {
+				de: {
+					browserTabTitle: "FOCUS Edit Map",
+					headerTitle: "Editing Map - Polygon", 
+					instructionCreatePoly: "Klicken Sie bitte auf die gewünschten Positionen auf der Karte, um ein Polygon zu erstellen. Doppelklick beendet die Polygonerstellung!",
+					instructionEditPoly: "Ziehen sie an den Knotenpunkten des gewünschten Polygons, um dieses zu bearbeiten und bestätigen sie anschließend den Vorgang!",
+					instructionDeletePoly: "Klicken Sie bitte auf das/die gewünschte(n) Polygone, um diese(s) zu löschen und bestätigen Sie anschließend den Vorgang!", 
+					titleCreateEntry : "Erstellen eines neuen Polygons",
+					labelName: "Name", 
+					labelDescription: "Beschreibung",
+					legendMenu: "Legende",
+					legTitle: "Polygon Layer",
+					legSubtitle: "Polygon",
+					infoTitle: "Info",
+					infoText: "Advances in Forestry Control and Automation Systems (FOCUS) ist ein EU FP7 Forschungsprojekt. FOCUS zielt auf die Optimierung und Verbesserung von Automatisierungs- und Steuerungsprozessen in der Forstwirtschaft ab. Die Entwicklung von technisch fortschrittlichen Lösungen - die Monitoring, Planung und Steuerung kombinieren - unterstützt dabei das Management von Prozessen der gesamten forstbasierten Wertschöpfungskette.",
+					projektTitle: "Projekt",
+					projectName: "FOCUS FP7",
+					projektPartner: "Partner",
+					projectPartnerList: "RSA iSPACE, FOCUS",
+					projectPublication: "Publikation",
+					projectPublicationDate: "Februar 2016" ,
+					projectDate: "Datum",
+					dataSource: "Datenquellen",
+					source1: "RSA iSPACE",
+					source2: "OpenStreetMap",
+					source3: "ESRI World Imagery",
+					swSource: "Softwarequellen",
+					swSource1: "Leaflet",
+					swSource2: "ESRI Leaflet",
+					swSource3: "Leaflet WFST",
+					swSource4: "Leaflet Draw",
+					swSource5: "Leaflet Control Locate",
+					swSourc6: "jQuery",
+					werkName: "Werk",
+					vonDatum: "Von",
+					bisDatum: "Bis",
+					labelZeit: "Zeit"
+				},
+				en: {
+					browserTabTitle: "FOCUS Edit Map",
+					headerTitle: "Editing Map - Polygon", 
+					instructionCreatePoly: "Please click on the map to create a new polygon. Double-click when you are finish!",
+					instructionEditPoly: "Drag the nodes of the polygon to edit it. Confirm your edits!",
+					instructionDeletePoly: "Click on the polygon(s) that should be deleted. Confirm the deletion!", 
+					titleCreateEntry : "Create a New Polygon",
+					labelName: "Name", 
+					labelDescription: "Description",
+					legendMenu: "Legend",
+					legTitle: "Polygon Layer",
+					legSubtitle: "Polygon",
+					infoTitle: "Info",
+					infoText: "Advances in Forestry Control and Automation Systems (FOCUS) is an FP7 European research project. FOCUS aims at advancing forestry control and automation through advanced technological solutions that combine control, monitoring and planning, to support the managment of the operations of the whole forest-based supply chain.",
+					projektTitle: "Project",
+					projectName: "FOCUS FP7",
+					projektPartner: "Partners",
+					projectPartnerList: "RSA iSPACE, FOCUS",
+					projectPublication: "Publication",
+					projectPublicationDate: "February 2016" ,
+					projectDate: "Date",
+					dataSource: "Data Sources",
+					source1: "RSA iSPACE",
+					source2: "OpenStreetMap",
+					source3: "ESRI World Imagery",
+					swSource: "Software Sources",
+					swSource1: "Leaflet",
+					swSource2: "ESRI Leaflet",
+					swSource3: "Leaflet WFST",
+					swSource4: "Leaflet Draw",
+					swSource5: "Leaflet Control Locate",
+					swSourc6: "jQuery",
+					werkName: "Saw Mill",
+					vonDatum: "From",
+					bisDatum: "To",
+					labelZeit: "Time"
+				}
+			};
+			
+			// Returns the translation data for the defualt language ("en"/"de")
+			function translate(key) {
+				if (langData.hasOwnProperty(lang)) {
+					if (langData[lang].hasOwnProperty(key)) {
+						return langData[lang][key];
+					} else {
+						return "Undefined";
+					}
+				} else {
+					return "Undefined";
+				}
+			};
+			 
+			// Translate elements
+			function translateView() {
+				$(".lang").each(function() {
+					var key = $(this).attr("data-lang");
+					$(this).text(translate(key));
+				});
+			};
+
+			$(document).ready(function() {
+				translateView();
+			});	
+		</script>
+		
+		<title class="lang" data-lang="browserTabTitle"></title>
+	</head>
+
+	<body onload="init();">
+		<!-- Map area -->
+		<div id='map'></div>
+		
+		<!-- Title bar -->
+		<div id="balken" class="mainColor">
+			<!-- Button for open the legend-menu -->
+			<div id="settingsArea" class="btnImg btn mainColor" title="Open Legend" onclick="toggleElem('infoBar');">
+				<text class="icon-menu fontIcon backColorTxt hoverTextCompl"></text>
+			</div>
+			<!-- Logo area within the title bar (left side of the bar) -->
+			<a href="http://www.researchstudio.at" target="_blank"><img class="logo logoRSA" src="images/logo.png"/></a>
+			<a href="http://focusnet.eu/" target="_blank"><img class="logo logoFOCUS" src="images/logo3.png"/></a>
+			
+			<!-- Title of the application -->
+			<div id="title" class="lang backColorTxt" data-lang="headerTitle"></div>
+			
+			<!-- Locate area -->
+			<div id='lacateOuterDiv'>
+				<div id='locateDiv'></div>
+				<div id='locateDivTxt' class="btnImg" title="My Location">
+					<text class="icon-location fontIcon backColorTxt hoverTextCompl"></text>
+				</div>
+			</div>
+			
+			<!-- Edit area -->
+			<div id='editDiv'></div>
+		</div>
+		
+		<!-- Menu that appears when the user starts creating/editing -->
+		<div id='creatorMenu' class='menu backColor'> 
+			<!-- Start text for creating a marker -->
+			<div id='startNewMarkerDiv' class="marginTopStartMenuTxt menuDiv centerDiv instructionsMinWidth">
+				<text class='lang mainColorTxt boldTxt' data-lang="instructionCreatePoly"></text>
+				<div class="delSavButtons">
+					<div id="cancelCreatePolyButton" class="delSavMarkercancleButton btn btnImg grayColor centerDiv">
+						<text class="icon-cross fontIcon backColorTxt hoverTextCompl"></text>
+					</div>
+				</div>
+			</div>
+			<!-- Start text for editing a marker -->
+			<div id='startEditDiv' class="marginTopStartMenuTxt menuDiv centerDiv instructionsMinWidth">
+				<text class='lang mainColorTxt boldTxt' data-lang="instructionEditPoly"></text>
+				<div class="delSavButtons">
+					<div id="editMarkercancleButton" class="delSavMarkercancleButton btn btnImg grayColor centerDiv" title="Cancel">
+						<text class="icon-cross fontIcon backColorTxt hoverTextCompl"></text>
+					</div>
+					<div id="editMarkerapplyButton" class="delSavMarkerapplyButton btn btnImg mainColor centerDiv" title="Save">
+						<text class="icon-checkmark fontIcon backColorTxt hoverTextCompl"></text>
+					</div>
+				</div>
+			</div>
+			<!-- Start text for deleting a marker -->
+			<div id='startRemoveDiv' class="marginTopStartMenuTxt menuDiv centerDiv instructionsMinWidth">
+				<text class='lang mainColorTxt boldTxt' data-lang="instructionDeletePoly"></text>
+				<div class="delSavButtons">
+					<div id="delMarkercancleButton" class="delSavMarkercancleButton btn btnImg grayColor centerDiv" title="Cancel">
+						<text class="icon-cross fontIcon backColorTxt hoverTextCompl"></text>
+					</div>
+					<div id="delMarkerapplyButton" class="delSavMarkerapplyButton btn btnImg mainColor centerDiv" title="Save">
+						<text class="icon-checkmark fontIcon backColorTxt hoverTextCompl"></text>
+					</div>
+				</div>
+			</div>
+			
+			<!-- Fields for submit values for a new/updated marker -->
+			<div id='newMarkerDiv' class="menuDiv centerDiv">
+				<table id='newMarkerTbl' border="0">
+					<col width="150px">
+					<col width="*">
+					<th colspan="2">
+						<text class='lang mainColorTxt boldTxt titleTxt' data-lang="titleCreateEntry"></text>
+					</th>
+					<tr>
+						<td><label id="nameLabel" name="name" class="lang mainColorTxt stdTxt" data-lang="labelName"></label></td>
+						<td><input id="nameTextbox" type="text" class="fieldWidth stdTxt" name="name" /></td>
+					</tr>
+					<tr>
+						<td><label id="descriptionLabel" name="description" class="lang mainColorTxt stdTxt" data-lang="labelDescription"></label></td>
+						<td><input id="descriptionTextbox" type="text" class="fieldWidth stdTxt" name="description"/></td>
+					</tr>
+					<tr>
+						<td></td>
+						<td>
+							<div class="btnTbl">
+								<div id="newMarkercancleButton" class="btn btnImg grayColor" title="Cancel">
+									<text class="icon-cross fontIcon backColorTxt hoverTextCompl"></text>
+								</div>
+								<div id="newMarkerapplyButton" class="btn btnImg mainColor rightAlign" title="Save">
+									<text class="icon-checkmark fontIcon backColorTxt hoverTextCompl"></text>
+								</div>
+							</div>
+						</td>
+					</tr>
+				</table>				
+			</div>
+		</div>
+		
+		<!-- Navigation area -->
+		<div id="navigation">
+			<div id="btnPlus" class="btnImg btn mainColor" title="Zoom-in" onclick="zoomIn();">
+				<text class="icon-plus fontIcon backColorTxt hoverTextCompl"></text>
+			</div>
+			<div id="btnHome" class="btnImg btn mainColor" title="Fit Bounds" onclick="setInitialExtent();">
+				<text class="icon-home fontIcon backColorTxt hoverTextCompl"></text>
+			</div>
+			<div id="btnMinus" class="btnImg btn mainColor" title="Zoom-out" onclick="zoomOut();">
+				<text class="icon-minus fontIcon backColorTxt hoverTextCompl"></text>
+			</div>
+		</div>
+		
+		<!-- Information area on the right side -->	
+		<div id="infoBar" class="backColor">
+			<!-- Settings-button for closing the menu --> 
+			<text id="closeBtnInfoBar" class="closeBtn closeRight icon-menu fontIcon mainColorTxt hoverText" title="Close" onclick="toggleElem('infoBar');"></text>
+			
+			<div id="logoArea">
+				<text class="lang mainColorTxt titleTxt boldTxt headlines" data-lang="legendMenu"></text>
+			</div>
+			
+			<div id="infoArea">
+				<!-- Table containing specific information about the map like legend, overview map, meta infos, ... -->
+				<table id="infoBarTbl" border="0">
+					<col width="100%">
+					
+					<tr class="lineRow">
+						<th colspan="1">
+							<div class="lineTbl lineColor"></div>
+						</th>
+					</tr>
+					
+					<!-- Legend -->
+					<tr>
+						<td>
+							<div id="legendDiv" >
+								<table id="legendTbl" border = "0">
+									<col width="15%">
+									<col width="*">
+									<tr>
+										<th colspan="2"><text class="lang mainColorTxt infoTextBold" data-lang="legTitle"></text></th>
+									</tr>
+									<tr>
+										<td><img class="legendIcon" src="images/polygonLeg.png"/></td>
+										<td><text class="lang mainColorTxt" data-lang="legSubtitle"></text></td>
+									</tr>										
+								</table>
+							</div>
+						</td>
+					</tr>
+					
+					<tr class="lineRow">
+						<th colspan="1">
+							<div class="lineTbl lineColor"></div>
+						</th>
+					</tr>
+					
+					<tr>
+						<td>
+							<div class="legendLeft">
+								<div id="infoTitle">
+									<text class="lang mainColorTxt infoTextBold" data-lang="infoTitle"></text>
+								</div>
+								<div>
+									<text class="lang mainColorTxt" data-lang="infoText"></text>
+								</div>
+							</div>
+						</td>
+					</tr>
+					
+					<tr class="lineRow">
+						<th colspan="1">
+							<div class="lineTbl lineColor"></div>
+						</th>
+					</tr>
+					
+					<tr>
+						<th>
+							<!-- Table containing meta infos about the project, author, date, source ... -->
+							<table id="infoTable" border="0">
+								<col width="35%">
+								<col width="65%">
+								<tr>
+									<td class="infoTextTitle">
+										<text class="lang infoTextBold mainColorTxt" data-lang="projektTitle"></text>
+									</td>
+									<td>
+										<div id="projectDiv"><a href="http://focusnet.eu/" target="_blank"><text class="lang mainColorTxt underline" data-lang="projectName"></text></a></div>
+									</td>
+								</tr>
+								<tr>
+									<td class="infoTextTitle">
+										<text class="lang infoTextBold mainColorTxt" data-lang="projektPartner"></text>
+									</td>
+									<td>
+										<div id="partnerDiv"><text class="lang mainColorTxt" data-lang="projectPartnerList"></text></div>
+									</td>
+								</tr>
+								<tr>
+									<td class="infoTextTitle">
+										<text class="lang infoTextBold mainColorTxt" data-lang="projectPublication"></text>
+									</td>
+									<td>	
+										<div id="dateDiv"><text class="lang mainColorTxt" data-lang="projectPublicationDate"></text></div>
+									</td>
+								</tr>
+								<tr>
+									<td class="infoTextTitle">
+										<text class="lang infoTextBold mainColorTxt" data-lang="projectDate"></text>
+									</td>
+									<td>	
+										<div id="dateNowDiv"><text id="dateNowTxt" class="mainColorTxt"></text></div>
+									</td>
+								</tr>
+							</table>
+						</th>
+					</tr>
+					
+					<tr class="lineRow">
+						<th colspan="1">
+							<div class="lineTbl lineColor"></div>
+						</th>
+					</tr>	
+
+					<tr>
+						<th>
+							<!-- Data source -->
+							<text class="lang infoTextBold mainColorTxt source marginRightMenu" data-lang="dataSource"></text>
+							<div id="sourceDiv" class="marginRightMenu">
+								<a href="http://ispace.researchstudio.at/" target="_blank"><text class="lang mainColorTxt underline" data-lang="source1"></text></a>, 
+								<a href="https://osm.org/copyright" target="_blank"><text class="lang mainColorTxt underline" data-lang="source2"></text></a>, 
+								<a href="https://www.arcgis.com/home/item.html?id=10df2279f9684e4a9f6a7f08febac2a9" target="_blank"><text class="lang mainColorTxt underline" data-lang="source3"></text></a>
+							</div>
+							<!-- Software source -->
+							<div id="sw_source" class="marginRightMenu">
+								<table border="0">
+									<tr>
+										<td>
+											<text class="lang infoTextBold mainColorTxt source" data-lang="swSource"></text>
+										</td>
+										<td>
+											<div id="iconOpenSwSource" onclick="toggleSwSourceSection('sw_source_txt', 'iconOpenSwSource');">
+												<text  id="openSwSource" class="icon-play3 grayTxt hoverText"></text>
+											</div>
+										</td>
+									<tr>
+								</table>
+							</div>
+							<div id="sw_source_txt" class="marginRightMenu mainColorTxt">
+								<a href="https://github.com/Leaflet/Leaflet/blob/master/LICENSE" target="_blank"><text class="lang mainColorTxt underline" data-lang="swSource1"></text></a>, 
+								<a href="https://github.com/Esri/esri-leaflet/blob/master/LICENSE" target="_blank"><text class="lang mainColorTxt underline" data-lang="swSource2"></text></a>, 
+								<a href="https://github.com/Flexberry/Leaflet-WFST/blob/master/LICENSE.md" target="_blank"><text class="lang mainColorTxt underline" data-lang="swSource3"></text></a>, 
+								<a href="https://github.com/Leaflet/Leaflet.draw/blob/master/MIT-LICENCE.txt" target="_blank"><text class="lang mainColorTxt underline" data-lang="swSource4"></text></a>,
+								<a href="https://github.com/domoritz/leaflet-locatecontrol/blob/gh-pages/LICENSE" target="_blank"><text class="lang mainColorTxt underline" data-lang="swSource5"></text></a>,
+								<a href="https://jquery.org/license/" target="_blank"><text class="lang mainColorTxt underline" data-lang="swSourc6"></text></a>
+							</div>
+						</th>
+					</tr>
+					
+					<tr class="lineRow">
+						<th colspan="1">
+							<div class="lineTbl lineColor"></div>
+						</th>
+					</tr>
+					
+				</table>
+			</div>
+		</div>
+		
+		<!-- Button for changing the background map -->
+		<div id="basemapChangeBtn" class="mainColor btn" onClick="changeBasemap();">
+			<img id="basemapImg" src="images/satB.png"/>
+		</div>
+		
+	</body>
+</html>
